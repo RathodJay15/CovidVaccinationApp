@@ -4,6 +4,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,14 @@ import java.util.ArrayList;
 
 public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAdapter.ViewHolder>{
     private Context con;
-    private String userRole;
+    private String userRole,phone;
     private databaseHelper myDB;
     private ArrayList ctID, city, area, address, date, center, time;
-    private ArrayList<Integer> cityIds;
+    private ArrayList<Integer> centerIds;
     private slotAppointment slotAppointment;
-    public RecyclerCenterAdapter(Context con,ArrayList<Integer> cityIds, ArrayList city, ArrayList area,  ArrayList center ,ArrayList address,ArrayList date,ArrayList time,String userRole,slotAppointment slotAppointment) {
+    public RecyclerCenterAdapter(Context con, ArrayList<Integer> centerIds, ArrayList city, ArrayList area, ArrayList center , ArrayList address, ArrayList date, ArrayList time, String userRole, String phone, slotAppointment slotAppointment) {
         this.con = con;
-        this.cityIds = cityIds;
+        this.centerIds = centerIds;
         this.city = city;
         this.area = area;
         this.address = address;
@@ -33,12 +34,11 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
         this.center = center;
         this.time = time;
         this.userRole = userRole;
+        this.phone = phone;
         this.slotAppointment = slotAppointment;
         myDB = databaseHelper.getInstance(con);
 
     }
-
-
 
     @NonNull
     @Override
@@ -55,6 +55,7 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
         holder.date.setText(date.get(position).toString());
         holder.center.setText(center.get(position).toString());
         holder.time.setText(time.get(position).toString());
+        holder.cid.setText(centerIds.get(position).toString());
 
         if(userRole.equals("admin")){
             holder.btn_book.setVisibility(GONE);
@@ -68,7 +69,7 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    int cityId = cityIds.get(position);
+                    int cityId = centerIds.get(position);
                     // Remove from database
                     myDB.deleteCenter(cityId);
                     // Remove from lists
@@ -78,7 +79,7 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
                     address.remove(position);
                     date.remove(position);
                     time.remove(position);
-                    cityIds.remove(position);
+                    centerIds.remove(position);
 
                     // Notify adapter
                     notifyItemRemoved(position);
@@ -91,7 +92,10 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
         holder.btn_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.btn_book.setText((CharSequence) ctID);
+                Intent intent = new Intent(con, bookCertificate.class);
+                intent.putExtra("phone",phone);
+                intent.putExtra("cid", centerIds.get(position).toString());
+                con.startActivity(intent);
             }
         });
 
@@ -103,7 +107,7 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView city, area, address, date, center,time;
+        TextView city, area, address, date, center,time , cid;
         Button btn_book,btn_remove;
 
         public ViewHolder(@NonNull View itemView) {
@@ -115,6 +119,7 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
             date = itemView.findViewById(R.id.date);
             center = itemView.findViewById(R.id.center);
             time = itemView.findViewById(R.id.time);
+            cid = itemView.findViewById(R.id.tv_cid);
             btn_book = itemView.findViewById(R.id.btn_book);
             btn_remove = itemView.findViewById(R.id.btn_Remove);
 

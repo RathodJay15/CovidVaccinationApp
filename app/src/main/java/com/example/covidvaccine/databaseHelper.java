@@ -98,10 +98,14 @@ public class databaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("select * from users" ,null);
     }
 
-    public void updateStatus(String colnm, String val,String phone)
+    public void updateStatus(String val , String phone)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("Update users set "+colnm+" = "+val+" where phone ="+phone);
+        ContentValues values = new ContentValues();
+        values.put("status",val);
+        String whereClause = "phone = ?";
+        String[] whereArgs = {phone};
+        db.update("users", values, whereClause, whereArgs);
     }
 
     public Cursor getCity()
@@ -125,6 +129,11 @@ public class databaseHelper extends SQLiteOpenHelper {
         String whereClause = "id = ?";
         String[] whereArgs = {String.valueOf(cityId)};
         db.delete("VaccineCenter", whereClause, whereArgs);
+    }
+    public Cursor getSelectedCenter(String cid)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("select * from VaccineCenter where id = " + cid ,null);
     }
 
     public void insertcnter(){

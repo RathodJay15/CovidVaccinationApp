@@ -21,7 +21,7 @@ public class profile extends AppCompatActivity {
     BottomNavigationView navigationView;
     Button mButton;
     String message,phone;
-    Intent intent;
+
     ImageView userImage;
 
     TextView name, user_aadhar, user_dob, user_phone, user_email, user_gender, user_password, v_status;
@@ -37,7 +37,7 @@ public class profile extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        intent = getIntent();
+        Intent intent = getIntent();
         message = intent.getStringExtra("isAdmin");
         mButton = findViewById(R.id.btn_managment);
         if (message.equals("true")) {
@@ -134,7 +134,7 @@ public class profile extends AppCompatActivity {
             } else {
                 name.setText("Admin");
             }
-            myDB.insertcnter(); //insert fresh vaccination data
+            //myDB.insertcnter(); //insert fresh vaccination data
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

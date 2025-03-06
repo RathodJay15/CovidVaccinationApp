@@ -6,68 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_green_blue"
-    tools:context=".profile">
+    tools:context=".bookCertificate">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirmation"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title">
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:layout_marginBottom="59dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginEnd="80dp"
-                    app:srcCompat="@drawable/profile_radius" />
-
-                <TextView
-                    android:id="@+id/tv_user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="115dp"
-                    android:layout_marginTop="200dp"
-                    android:layout_marginEnd="115dp"
-                    android:gravity="center"
-                    android:text="UserName"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/tv_user_image"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="125dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="125dp"
-                    android:background="@drawable/admin"
-                    android:foregroundGravity="center"
-                    app:shapeAppearanceOverlay="@style/Circular"
-                    tools:ignore="VectorDrawableCompat" />
-
-            </RelativeLayout>
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/vaccination_center_title">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,19 +63,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.3"
-                        android:drawableStart="@drawable/aadhar"
                         android:drawablePadding="5dp"
-                        android:text="Aadhar No. :"
+                        android:text="Name :"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_user_aadhar"
+                        android:id="@+id/tv_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="000000000000"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -127,7 +99,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.3"
-                        android:drawableStart="@drawable/calendar"
                         android:drawablePadding="5dp"
                         android:text="Date of Birth :"
                         android:textColor="@color/black"
@@ -135,11 +106,10 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_user_dob"
+                        android:id="@+id/tv_dob"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="- - / - - / - - - - "
                         android:textColor="@color/black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -163,19 +133,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.3"
-                        android:drawableStart="@drawable/phone"
                         android:drawablePadding="5dp"
-                        android:text="Phone :"
+                        android:text="Age :"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_user_phone"
+                        android:id="@+id/tv_age"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="9999999999"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -199,19 +167,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.3"
-                        android:drawableStart="@drawable/email"
                         android:drawablePadding="5dp"
-                        android:text="Email :"
+                        android:text="@string/gender"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_user_email"
+                        android:id="@+id/tv_gender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="admin123@gmail.com"
                         android:textColor="@color/black"
                         android:textSize="18dp" />
                 </LinearLayout>
@@ -236,20 +202,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.3"
-                        android:drawableStart="@drawable/ic_user"
-                        android:drawableLeft="@drawable/ic_user"
                         android:drawablePadding="5dp"
-                        android:text="@string/gender"
+                        android:text="Aadhar no. :"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_user_gender"
+                        android:id="@+id/tv_aadharno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Admin"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -273,42 +236,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.3"
-                        android:drawableStart="@drawable/ic_lock"
-                        android:drawablePadding="5dp"
-                        android:text="Password :"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_user_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="abc#123"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="0"
-                    android:background="@color/medium_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10sp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.3"
-                        android:drawableStart="@drawable/injection"
                         android:drawablePadding="5dp"
                         android:text="Vaccine Status :"
                         android:textColor="@color/black"
@@ -316,14 +243,144 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_v_status"
+                        android:id="@+id/tv_status"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Pending"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0"
+                    android:background="@color/medium_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.3"
+                        android:drawablePadding="5dp"
+                        android:text="Center Name :"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0"
+                    android:background="@color/medium_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.3"
+                        android:drawablePadding="5dp"
+                        android:text="Area :"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0"
+                    android:background="@color/medium_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.3"
+                        android:drawablePadding="5dp"
+                        android:text="City :"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0"
+                    android:background="@color/medium_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="16sp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.3"
+                        android:drawablePadding="5dp"
+                        android:text="Select Vaccine :"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/vaccine_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/spinner_background"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -332,20 +389,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
-            <Button
-                android:id="@+id/btn_managment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:background="@drawable/custom_btn"
-                android:foregroundGravity="center_horizontal"
-                android:onClick="goManagment"
-                android:text="Manage Users"
-                android:textSize="20dp"
-                android:visibility="gone"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/dark_blue" />
+                <Button
+                    android:id="@+id/btn_Confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/custom_btn"
+                    android:foregroundGravity="center_horizontal"
+                    android:text="Confirm"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/green" />
 
             </LinearLayout>
             <LinearLayout
@@ -355,37 +410,26 @@
                 android:textColor="@color/white"
                 android:gravity="center">
 
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/custom_btn"
-                android:foregroundGravity="center_horizontal"
-                android:onClick="logout"
-                android:text="Logout"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/red" />
+                <Button
+                    android:id="@+id/btn_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/custom_btn"
+                    android:foregroundGravity="center_horizontal"
+                    android:text="Download Certificate"
+                    android:visibility="gone"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/dark_blue"/>
+
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/dark_blue"
-        app:itemIconSize="30dp"
-        app:itemIconTint="@drawable/nav_selector_item"
-        app:itemRippleColor="@android:color/transparent"
-        app:itemTextColor="@color/white"
-        app:labelVisibilityMode="auto"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/navigation_bar_items" />
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

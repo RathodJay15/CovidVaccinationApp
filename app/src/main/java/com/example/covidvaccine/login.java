@@ -72,7 +72,7 @@ public class login extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-                //Toast.makeText(this, "Admin login!!", Toast.LENGTH_SHORT).show();
+
             } else {
                 phone.setError("invalid phone no.");
                 phone.requestFocus();

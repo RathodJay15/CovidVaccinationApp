@@ -32,7 +32,7 @@ public class slotAppointment extends AppCompatActivity {
     databaseHelper myDb;
     RecyclerCenterAdapter adapter;
     ArrayList<String>  city, area, center, address,date,time;
-    ArrayList<Integer> cityIds;
+    ArrayList<Integer> centerIds;
     ArrayList<String> cityList;
 
     @Override
@@ -111,14 +111,14 @@ public class slotAppointment extends AppCompatActivity {
             userRole = "notadmin";
         }
 
-        cityIds = new ArrayList<>();
+        centerIds = new ArrayList<>();
         city = new ArrayList<>();
         area = new ArrayList<>();
         center = new ArrayList<>();
         address = new ArrayList<>();
         date = new ArrayList<>();
         time = new ArrayList<>();
-        adapter = new RecyclerCenterAdapter(this ,cityIds, city, area, center, address, date, time,userRole,slotAppointment.this);
+        adapter = new RecyclerCenterAdapter(this , centerIds, city, area, center, address, date, time,userRole,phone,slotAppointment.this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Cursor c;
@@ -135,7 +135,7 @@ public class slotAppointment extends AppCompatActivity {
             return;
         } else {
             while (c.moveToNext()) {
-                cityIds.add(Integer.valueOf(c.getString(0)));
+                centerIds.add(Integer.valueOf(c.getString(0)));
                 city.add(c.getString(1));
                 area.add(c.getString(2));
                 center.add(c.getString(3));
