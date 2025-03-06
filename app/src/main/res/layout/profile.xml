@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_green_blue"
+    android:layout_marginBottom="-50sp"
     tools:context=".profile">
 
     <ScrollView
@@ -386,6 +387,7 @@
         app:itemTextColor="@color/white"
         app:labelVisibilityMode="auto"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="10sp"
         app:menu="@menu/navigation_bar_items" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

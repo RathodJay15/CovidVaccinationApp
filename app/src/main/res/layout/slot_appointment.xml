@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="-50sp"
     android:background="@drawable/gradient_green_blue"
     tools:context=".slotAppointment">
 
@@ -83,6 +84,8 @@
         app:itemRippleColor="@android:color/transparent"
         app:itemTextColor="@color/white"
         app:labelVisibilityMode="auto"
+
+        android:paddingBottom="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation_bar_items" />
 </androidx.constraintlayout.widget.ConstraintLayout>
