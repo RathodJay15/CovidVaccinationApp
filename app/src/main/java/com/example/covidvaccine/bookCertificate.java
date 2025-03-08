@@ -71,11 +71,6 @@ public class bookCertificate extends AppCompatActivity {
         phone = intent.getStringExtra("phone");
         centerID = intent.getStringExtra("cid");
 
-        ArrayList<String> vaccines = new ArrayList<>();
-        vaccines.add("Covishield");
-        vaccines.add("Covaxin");
-        vaccines.add("Pfizer-BioNTech");
-
         tv_nm = findViewById(R.id.tv_name);
         tv_dob = findViewById(R.id.tv_dob);
         tv_age = findViewById(R.id.tv_age);
@@ -89,22 +84,6 @@ public class bookCertificate extends AppCompatActivity {
         confirm = findViewById(R.id.btn_Confirm);
         download = findViewById(R.id.btn_download);
 
-        vaccineSpinner = findViewById(R.id.vaccine_spinner);
-
-        ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, vaccines);
-        vaccineSpinner.setAdapter(cityAdapter);
-
-        vaccineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                vaccineName = vaccineSpinner.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         myDB = new databaseHelper(bookCertificate.this);
         Cursor cursor1 = myDB.getSelectedCenter(centerID);
@@ -143,7 +122,26 @@ public class bookCertificate extends AppCompatActivity {
             dose = cursor2.getString(7);
 
         }
+        ArrayList<String> vaccines = new ArrayList<>();
+        vaccines.add("Covishield");
+        vaccines.add("Covaxin");
+        vaccines.add("Pfizer-BioNTech");
+        vaccineSpinner = findViewById(R.id.vaccine_spinner);
 
+        ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, vaccines);
+        vaccineSpinner.setAdapter(cityAdapter);
+
+        vaccineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                vaccineName = vaccineSpinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         tv_nm.setText(name);
         tv_dob.setText(dob);
@@ -167,7 +165,6 @@ public class bookCertificate extends AppCompatActivity {
                 editVaccinationCertificate();
             }
         });
-
     }
     public void confirmed()
     {
@@ -183,8 +180,10 @@ public class bookCertificate extends AppCompatActivity {
         download.setVisibility(VISIBLE);
         if(dose.equals("Pending")) {
             myDB.updateStatus( "1st Dose" ,phone);
+            dose = "1st Dose";
         } else if (dose.equals("1st Dose")) {
             myDB.updateStatus("2nd Dose",phone);
+            dose = "2nd Dose";
         }
     }
     public void editVaccinationCertificate() {

@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class profile extends AppCompatActivity {
     BottomNavigationView navigationView;
     Button mButton;
+    databaseHelper myDB;
     String message,phone;
 
     ImageView userImage;
@@ -48,6 +49,12 @@ public class profile extends AppCompatActivity {
         }
         showUserInfo();
         navigationView = findViewById(R.id.bottom_navigation);
+
+        Cursor c = myDB.getAllCenter();
+        if(c.getCount() == 0){
+            myDB.insertcnter(); //insert fresh vaccination data
+        }
+
     }
 
 
@@ -87,7 +94,7 @@ public class profile extends AppCompatActivity {
 
     public void showUserInfo() {
         try {
-            databaseHelper myDB = new databaseHelper(profile.this);
+            myDB = new databaseHelper(profile.this);
             name = findViewById(R.id.tv_user_name);
             user_aadhar = findViewById(R.id.tv_user_aadhar);
             user_dob = findViewById(R.id.tv_user_dob);
@@ -134,7 +141,7 @@ public class profile extends AppCompatActivity {
             } else {
                 name.setText("Admin");
             }
-            //myDB.insertcnter(); //insert fresh vaccination data
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

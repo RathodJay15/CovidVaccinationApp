@@ -146,6 +146,7 @@ public class slotAppointment extends AppCompatActivity {
         }
         c.close();
         adapter.notifyDataSetChanged();
+
     }
 
     public void refreshSpinner() {

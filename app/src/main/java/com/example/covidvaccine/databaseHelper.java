@@ -27,7 +27,6 @@ public class databaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table users(phone number primary key, name TEXT, password TEXT, email text, gender text, dob text, aadhar text not null, status text);");
         db.execSQL("CREATE TABLE VaccineCenter (id INTEGER PRIMARY KEY AUTOINCREMENT, city TEXT NOT NULL, area_name TEXT NOT NULL, vaccination_center_name TEXT NOT NULL, center_address TEXT NOT NULL, date text not null,time text);");
-
     }
 
     @Override

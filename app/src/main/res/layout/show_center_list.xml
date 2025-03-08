@@ -171,6 +171,7 @@
                 android:onClick="remove"
                 android:text="Remove Center"
                 android:textSize="20sp"
+                android:layout_margin="5sp"
                 android:visibility="gone"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/red" />

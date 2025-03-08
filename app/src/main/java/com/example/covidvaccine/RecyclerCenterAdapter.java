@@ -3,8 +3,11 @@ package com.example.covidvaccine;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +16,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAdapter.ViewHolder>{
     private Context con;
-    private String userRole,phone;
+    private String userRole,phone,dose;
     private databaseHelper myDB;
-    private ArrayList ctID, city, area, address, date, center, time;
+    private ArrayList  city, area, address, date, center, time;
     private ArrayList<Integer> centerIds;
     private slotAppointment slotAppointment;
-    public RecyclerCenterAdapter(Context con, ArrayList<Integer> centerIds, ArrayList city, ArrayList area, ArrayList center , ArrayList address, ArrayList date, ArrayList time, String userRole, String phone, slotAppointment slotAppointment) {
+    public RecyclerCenterAdapter(Context con, ArrayList<Integer> centerIds, ArrayList city, ArrayList area, ArrayList center , ArrayList address, ArrayList date, ArrayList time, String userRole, String phone , slotAppointment slotAppointment) {
         this.con = con;
         this.centerIds = centerIds;
         this.city = city;
@@ -37,7 +41,12 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
         this.phone = phone;
         this.slotAppointment = slotAppointment;
         myDB = databaseHelper.getInstance(con);
-
+        if(!phone.equals("1234567890"))
+        {
+            Cursor c = myDB.getUser(phone);
+            c.moveToFirst();
+            dose = c.getString(7);
+        }
     }
 
     @NonNull
@@ -48,7 +57,7 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.city.setText(city.get(position).toString());
         holder.area.setText(area.get(position).toString());
         holder.address.setText(address.get(position).toString());
@@ -84,7 +93,7 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
                     // Notify adapter
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, getItemCount());
-                    Toast.makeText(con, "Item Removed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(con, "Center Removed!!", Toast.LENGTH_SHORT).show();
                     slotAppointment.refreshSpinner();
                 }
             }
@@ -92,10 +101,25 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
         holder.btn_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(con, bookCertificate.class);
-                intent.putExtra("phone",phone);
-                intent.putExtra("cid", centerIds.get(position).toString());
-                con.startActivity(intent);
+                if(dose.equals("2nd Dose"))
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(con);
+                    builder.setCancelable(true);
+                    builder.setTitle("Fully Vaccinated!!");
+                    builder.setMessage("You have already taken 2nd dose!!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) { }
+                    });
+                    builder.show();
+                }
+                else
+                {
+                    Intent intent = new Intent(con, bookCertificate.class);
+                    intent.putExtra("phone",phone);
+                    intent.putExtra("cid", centerIds.get(position).toString());
+                    con.startActivity(intent);
+                }
             }
         });
 
