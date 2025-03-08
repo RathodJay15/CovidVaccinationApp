@@ -41,8 +41,7 @@ public class RecyclerCenterAdapter extends RecyclerView.Adapter<RecyclerCenterAd
         this.phone = phone;
         this.slotAppointment = slotAppointment;
         myDB = databaseHelper.getInstance(con);
-        if(!phone.equals("1234567890"))
-        {
+        if (!"1234567890".equals(phone) && phone != null) {
             Cursor c = myDB.getUser(phone);
             c.moveToFirst();
             dose = c.getString(7);
